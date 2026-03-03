@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Application;
-use App\Models\Job;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewInquiry;
 
 class ApplicationController extends Controller
 {
@@ -23,7 +24,7 @@ class ApplicationController extends Controller
             'phone' => ['required']
         ]);
 
-        Application::create([
+        $application = Application::create([
             'first_name' => request('first_name'),
             'last_name' => request('last_name'),
             'email' => request('email'),
@@ -31,6 +32,15 @@ class ApplicationController extends Controller
             'message' => request('message')
         ]);
 
-        return redirect('/contact')->with('success', 'Application submitted!');
+        Mail::to('malhasaspam@gmail.com')
+            ->queue(new NewInquiry(
+                $application->first_name,
+                $application->last_name,
+                $application->email,
+                $application->phone,
+                $application->message
+            ));
+
+        return redirect('/NewInquiry');
     }
 }

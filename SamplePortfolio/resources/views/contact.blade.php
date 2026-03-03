@@ -39,7 +39,7 @@
             placeholder="Message"
         ></textarea>
 
-        <button type="submit" class="relative rounded-full p-2 bg-sky-700 text-white hover:bg-sky-800 focus:outline-2 focus:outline-offset-2 focus:outline-sky-500">
+        <button href="/NewInquiry" type="submit" class="relative rounded-full p-2 bg-sky-700 text-white hover:bg-sky-800 focus:outline-2 focus:outline-offset-2 focus:outline-sky-500">
         Message Me!
         </button>
         
